@@ -1,5 +1,6 @@
 # Project specific
 */_DatabaseConfiguration.java
+src/main/java/com/skaugvoll/timetable/_DatabaseConfiguration.java
 
 # Eclipse
 .classpath
