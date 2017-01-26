@@ -106,13 +106,6 @@ public class DatabaseHandler {
 
 
 
-
-
-
-
-
-
-
     /*
     *  Method to test under development;
     *  Until I figure out how to write the God damn maven unit test...

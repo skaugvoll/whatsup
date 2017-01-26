@@ -15,9 +15,15 @@ import javafx.scene.layout.*;
  */
 public class LoginView extends Scene {
 
+    LoginController controller;
+
+    Label unsuccessfull;
+
 
     public LoginView(@NamedArg("root") Parent root) {
         super(root);
+        controller = new LoginController(this);
+
         super.getStylesheets().add("/loginCSS.css");
 
         BorderPane layout = (BorderPane) super.getRoot();
@@ -60,6 +66,19 @@ public class LoginView extends Scene {
         TextField usrInput = new TextField();
         PasswordField pswInput = new PasswordField();
         Button submit = new Button("Login");
+        Button register = new Button("Register");
+
+
+        // Validation fields
+        /*
+            TODO:
+
+         */
+        unsuccessfull = new Label();
+        unsuccessfull.setVisible(false);
+
+
+
 
 
         //Configuration:
@@ -73,18 +92,28 @@ public class LoginView extends Scene {
 
         submit.getStyleClass().add("submit");
         submit.setOnAction( e -> {
-            // do something
+            controller.login(usrInput.getText(),pswInput.getText());
         });
+
+        register.setOnAction( e -> {
+           controller.register(usrInput.getText(),pswInput.getText());
+        });
+
+
+
+
+
+
 
         //Add elements to logincomponent
         loginComponent.add(usrLabel,1,1);
         loginComponent.add(usrInput,2,1);
         loginComponent.add(pswLabel,1,2);
         loginComponent.add(pswInput,2,2);
-        //loginComponent.add(submit,2,3);
+        loginComponent.add(unsuccessfull,2,3);
 
         //Add elements to centerComponent
-        centerComponent.getChildren().addAll(welcome,loginComponent,submit);
+        centerComponent.getChildren().addAll(welcome,loginComponent,register,submit);
 
 
         //Add component to layout
