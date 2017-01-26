@@ -1,4 +1,4 @@
-# whatsup
+# WhatsUp
 A project to learn Maven, Spring and to catch up on JavaFX.
 
 WhatsUp is a timetable application to create, save and share schedules.
@@ -10,6 +10,3 @@ knows what the other has planned and can coordinate their own day.
 ### You'll need to create a java class, with the name "_DatabaseConfiguration"
   This will contain all the sensitive information such as database uri, databasename, username, password  (if your using mongod Driver)
   and if you want to use mongolab API, you'll also need collectionName, and apikey
-  
- 
-}
