@@ -1,0 +1,17 @@
+.layout {
+    -fx-background-image: url("background.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-opacity: 70%;
+
+}
+
+.welcome {
+    /* Move to the left line */
+    -fx-font-size: 32;
+    -fx-font-weight: bold;
+
+}
+
+.submit {
+    /* move to the right line */
+}
