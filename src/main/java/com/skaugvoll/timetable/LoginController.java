@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class LoginController {
 
     LoginView view;
-    DatabaseHandler dbHandler = new DatabaseHandler();
+    DatabaseHandler dbHandler = Main.dbHandler;
 
     public LoginController(LoginView view){
         this.view = view;
