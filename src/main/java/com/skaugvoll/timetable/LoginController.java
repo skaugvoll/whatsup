@@ -1,6 +1,7 @@
 package com.skaugvoll.timetable;
 
 import com.mongodb.util.JSON;
+import javafx.scene.layout.BorderPane;
 import org.bson.BsonReader;
 import org.json.JSONObject;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -30,6 +31,7 @@ public class LoginController {
         else{
             // change scene!
             System.out.println("successfully logged inn");
+            Main.window.setScene(new PlanningView(new BorderPane())); // change scene
         }
 
     }

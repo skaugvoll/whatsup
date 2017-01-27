@@ -18,7 +18,8 @@ public class PlanningView extends Scene {
         super(root);
         BorderPane borderPane = (BorderPane) super.getRoot(); // the root layout
         // Basic configuration of the root layout:
-            // should set width and height!
+        // should set width and height!
+        borderPane.setPrefSize(700,600);
 
 
         // Create the TimeTable
