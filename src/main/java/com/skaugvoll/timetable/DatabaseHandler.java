@@ -4,10 +4,17 @@ package com.skaugvoll.timetable;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.*; // allow usaged of predefined filters, such as "eq", "and", etc.
+
+
 import org.bson.Document;
+
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+
 
 /**
  * Created by sigveskaugvoll on 26.01.2017.
@@ -19,6 +26,10 @@ public class DatabaseHandler {
     private MongoClient mongoclient;
     private MongoDatabase timetableDatabase;
     private MongoCollection<Document> timetableCollection; // this will be the object we interact with.
+
+    public DatabaseHandler(){
+        connectTodatabase();
+    }
 
 
     /**
@@ -65,10 +76,12 @@ public class DatabaseHandler {
      * */
     public void insertDocument(Document document){
         try{
+            System.out.println(document.toJson());
             this.timetableCollection.insertOne(document);
+            System.out.println("Success insertion one document");
         }
         catch(Exception e){
-            System.err.println("Something went wrong with inserting the document");
+            System.err.println("Something went wrong with inserting the document: " + e);
         }
     }
 
@@ -81,7 +94,7 @@ public class DatabaseHandler {
             this.timetableCollection.insertMany(documents);
         }
         catch(Exception e){
-            System.err.println("Something went wrong with inserting the documents");
+            System.err.println("Something went wrong with inserting the documents: " + e);
         }
     }
 
@@ -103,6 +116,22 @@ public class DatabaseHandler {
         }
     }
 
+    /**
+     * Queryes the database for given username, and returnes first document that matches
+     * There should only be one Document in the database with the given username
+     *
+     * */
+    public Document getByUsername(String username){
+
+        try{
+            return timetableCollection.find(eq("username",username)).first();
+        }
+        catch (Exception e){
+            System.out.println("Could not find user? -- catch is catched: " + e);
+            return null;
+        }
+
+    }
 
 
 
