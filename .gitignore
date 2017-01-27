@@ -11,6 +11,7 @@ src/main/java/com/skaugvoll/timetable/_DatabaseConfiguration.java
 .idea/
 *.iml
 *.iws
+*/*.iml
  
 # Mac
 .DS_Store
