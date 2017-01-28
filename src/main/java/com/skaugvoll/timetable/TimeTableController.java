@@ -25,7 +25,7 @@ public class TimeTableController implements PropertyChangeListener {
     public TimeTableController(TimetableComponent view) {
         this.view = view; // register the view that wants to use this controller
         this.root = view.getTimeTable();
-        setModel(PlanningView.model); // set the model we want to read / write to.
+        setModel(Main.model); // set the model we want to read / write to.
         initView();
     }
 
