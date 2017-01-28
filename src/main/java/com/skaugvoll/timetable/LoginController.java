@@ -1,11 +1,8 @@
 package com.skaugvoll.timetable;
 
-import com.mongodb.util.JSON;
-import javafx.scene.layout.BorderPane;
-import org.bson.BsonReader;
-import org.json.JSONObject;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import javafx.scene.layout.BorderPane;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.bson.Document;
 import java.util.HashMap;
 
@@ -16,6 +13,7 @@ public class LoginController {
 
     LoginView view;
     DatabaseHandler dbHandler = Main.dbHandler;
+    TimeTableModel model = Main.model;
 
     public LoginController(LoginView view){
         this.view = view;
@@ -29,9 +27,21 @@ public class LoginController {
             view.unsuccessfull.setVisible(true);
         }
         else{
-            // change scene!
             System.out.println("successfully logged inn");
+            // thread: set user in model)
+            Thread t1 = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    model.setUser(dbHandler.getByUsername(uname));
+                    System.out.println("Thread Done!");
+                }
+            });
+            t1.start();
+
+            // Change scene (To use a thread on this as well, Use Platform.runlater() because its opperate on a FX thread)
             Main.window.setScene(new PlanningView(new BorderPane())); // change scene
+
         }
 
     }
