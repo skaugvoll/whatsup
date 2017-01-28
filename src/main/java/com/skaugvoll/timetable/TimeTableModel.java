@@ -55,9 +55,38 @@ public class TimeTableModel {
         }
         else {
 
+            // update the schedule
             tasks.add(task); // add new task to schedule
             System.out.println("FIRE AWAY");
             schedule.put(day, tasks); // update the model schedule
+
+            // Thread: update the temporary user document schedule attribute.
+            Thread locT = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    // update the local user document
+                    if(user.containsKey("schedule")){
+                        user.replace("schedule", schedule);
+                    }
+                    else {
+                        user.put("schedule", schedule);
+                    }
+                    System.out.println("Local User: " + user);
+                }
+            });
+            // Thread: update the remote user document schedule attribute.
+            Thread remT = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    // update the remote user
+                    System.out.println("remT doing something");
+                }
+            });
+
+            locT.start();
+            remT.start();
+
+            // notify controllers about update.
             pcs.firePropertyChange("scheduleUpdate", oldtasks, tasks); // notify controller(s) with old and new value
         }
 
