@@ -7,6 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.*; // allow usaged of predefined filters, such as "eq", "and", etc.
 
 
+import com.mongodb.util.JSON;
 import org.bson.Document;
 
 
@@ -125,7 +126,7 @@ public class DatabaseHandler {
     public void updateScheduleByUsername(String username, Map schedule){
         System.out.println("BEFORE UPDATING");
         // convert Map to Document
-        this.timetableCollection.updateOne(eq("username", username), new Document("$set", new Document("schedule", schedule.toString())));
+        this.timetableCollection.updateOne(eq("username", username), new Document("$set", new Document("schedule", JSON.serialize(schedule)))); // Serializes an object into it's JSON form, returns String containing JSON form of the object
         System.out.println("AFTER UPDATING");
     }
 
@@ -152,6 +153,7 @@ public class DatabaseHandler {
 
     // Create method to convert Document Schedule to hashMap
 
+    // Create method to convert String on Json format to hashMap
 
 
 
