@@ -12,14 +12,16 @@ public class PlanningView extends Scene {
 
 
     // Create the shared timeTableModel the controllers want to use!
-    static TimeTableModel model = new TimeTableModel();
+    //static TimeTableModel model = new TimeTableModel();
+
 
     public PlanningView(@NamedArg("root") Parent root) {
         super(root);
         BorderPane borderPane = (BorderPane) super.getRoot(); // the root layout
         // Basic configuration of the root layout:
         // should set width and height!
-        borderPane.setPrefSize(700,600);
+        Main.window.setWidth(1100);
+        Main.window.setHeight(500);
 
 
         // Create the TimeTable
