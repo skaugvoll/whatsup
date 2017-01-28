@@ -2,6 +2,8 @@ package com.skaugvoll.timetable;
 
 
 
+import org.bson.Document;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
@@ -10,6 +12,12 @@ import java.util.*;
  * Created by sigveskaugvoll on 19.01.2017.
  */
 public class TimeTableModel {
+
+// Model fields and values, attributtes
+    Map<String, ArrayList<String[]>> schedule = new HashMap<>(); // save the schedule as {"Monday" : [subject,from,to,note],[subjectfrom,to,note]}
+    String username = null;
+    Document user = null;
+
 
 
 // UI-model setup
@@ -32,10 +40,10 @@ public class TimeTableModel {
 
 
 // Model methods!
-    Map<String, ArrayList<String[]>> schedule = new HashMap<>(); // save the schedule as {"Monday" : [subject,from,to,note],[subjectfrom,to,note]}
 
 
-// Setters / updaters : used by controllers to update the model, and notify other controllers to update their view
+
+    // Setters / updaters : used by controllers to update the model, and notify other controllers to update their view
     public void updateSchedule(String day, String[] task) throws IllegalArgumentException {
         ArrayList<String[]> tasks = schedule.get(day); // get the current schedule
         ArrayList<String[]> oldtasks = schedule.get(day); // create copy of
@@ -63,10 +71,22 @@ public class TimeTableModel {
         */
     }
 
+    public void setUser(Document user){
+        this.username = user.getString("username"); // get the value associated with the key "username"
+        this.user = user; // set the temporary user document
+    }
 
-    // Print the schedule
+
+
+    // Getters : used by controllers to update view!
+    public Map<String, ArrayList<String[]>> getSchedule(){
+        return this.schedule;
+    }
+
+
+    // HELPERS: the schedule
     private String printList(ArrayList<String[]> value) {
-         String task = ""  ;
+        String task = ""  ;
         for (String[] s: value){
             task +=  Arrays.toString(s) + ", ";
         }
@@ -74,10 +94,5 @@ public class TimeTableModel {
     }
 
 
-
-// Getters : used by controllers to update view!
-    public Map<String, ArrayList<String[]>> getSchedule(){
-        return this.schedule;
-    }
-
 }
+
