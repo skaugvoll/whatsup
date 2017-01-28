@@ -20,7 +20,7 @@ public class FormController implements PropertyChangeListener {
     // Start controller
     public FormController(FormComponent view){
         this.view = view; // register the view that wants to use this controller
-        setModel(PlanningView.model); // set the model we want to read / write to.
+        setModel(Main.model); // set the model we want to read / write to.
         initTimeComponent();
     }
 
