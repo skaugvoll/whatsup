@@ -80,6 +80,7 @@ public class TimeTableModel {
                 public void run() {
                     // update the remote user
                     System.out.println("remT doing something");
+                    Main.dbHandler.updateScheduleByUsername(username,schedule);
                 }
             });
 
