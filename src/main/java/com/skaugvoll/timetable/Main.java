@@ -16,6 +16,7 @@ public class Main extends Application
 {
 
     public static DatabaseHandler dbHandler = new DatabaseHandler();
+    public static TimeTableModel model = new TimeTableModel();
     public static Stage window;
 
     public static void main( String[] args )
