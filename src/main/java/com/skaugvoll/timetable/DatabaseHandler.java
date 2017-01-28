@@ -13,7 +13,7 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.Map;
 
 
 /**
@@ -117,6 +117,20 @@ public class DatabaseHandler {
     }
 
     /**
+     * Updates a specific document in the colletion
+     *
+     *
+     * */
+
+    public void updateScheduleByUsername(String username, Map schedule){
+        System.out.println("BEFORE UPDATING");
+        // convert Map to Document
+        this.timetableCollection.updateOne(eq("username", username), new Document("$set", new Document("schedule", schedule.toString())));
+        System.out.println("AFTER UPDATING");
+    }
+
+
+    /**
      * Queryes the database for given username, and returnes first document that matches
      * There should only be one Document in the database with the given username
      *
@@ -132,6 +146,12 @@ public class DatabaseHandler {
         }
 
     }
+
+
+    // Create method to convert HashMap Schedule to Document
+
+    // Create method to convert Document Schedule to hashMap
+
 
 
 
