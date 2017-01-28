@@ -89,6 +89,7 @@ public class LoginController {
         // Add userCredentials to the HashMap / user settings
         userCredentials.put("username", username);
         userCredentials.put("password", hashedPsw);
+        userCredentials.put("schedule", null);
 
 
         //Create and return the user object
