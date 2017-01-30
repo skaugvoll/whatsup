@@ -1,10 +1,12 @@
 package com.skaugvoll.timetable;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
@@ -91,12 +93,24 @@ public class TimeTableController implements PropertyChangeListener {
         root.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
+                // check if click is right-click --> delete action
+                if (e.getButton() == MouseButton.SECONDARY) {
+                    // if right button clicked:
+                    for (Node node : root.getChildren()) { // for each node in the timetable
+                        if (node instanceof VBox) { // check to see if clicked node is of "task" object
+                            if (node.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) { // identify the one clicked, and not all tasks
+                                System.out.println("Node: " + node + " at " + GridPane.getRowIndex(node) + "/" + GridPane.getColumnIndex(node));
+                                // update schedule with the removal!
+                                // Delete it from the view in the main thread to not get exception
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        root.getChildren().removeAll(node);
+                                    }
+                                });
 
-                for( Node node: root.getChildren()) {
 
-                    if( node instanceof VBox) {
-                        if( node.getBoundsInParent().contains(e.getSceneX(),  e.getSceneY())) {
-                            System.out.println( "Node: " + node + " at " + GridPane.getRowIndex( node) + "/" + GridPane.getColumnIndex( node));
+                            }
                         }
                     }
                 }
