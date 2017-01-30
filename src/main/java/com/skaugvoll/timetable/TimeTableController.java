@@ -1,8 +1,11 @@
 package com.skaugvoll.timetable;
 
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import java.beans.PropertyChangeEvent;
@@ -83,6 +86,25 @@ public class TimeTableController implements PropertyChangeListener {
         // A timetable for school has 5 days (columns) and 12 rows (times: 8:15 --> 2000)
         // + One row for column specification and one row for row specification
         // Total of 6 Columns, 13 Rows
+
+        // Handle click on task in timetable!
+        root.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+
+                for( Node node: root.getChildren()) {
+
+                    if( node instanceof VBox) {
+                        if( node.getBoundsInParent().contains(e.getSceneX(),  e.getSceneY())) {
+                            System.out.println( "Node: " + node + " at " + GridPane.getRowIndex( node) + "/" + GridPane.getColumnIndex( node));
+                        }
+                    }
+                }
+            }
+        });
+
+
+
 
         for (int r = 0; r < 13; r++) {
 
